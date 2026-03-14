@@ -7,11 +7,54 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; color: #333; direction: rtl; }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    background: #0d3b6e;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .navbar-brand {
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 4px;
+  }
+  .navbar-links li a {
+    color: #cce0f5;
+    text-decoration: none;
+    padding: 16px 14px;
+    display: block;
+    font-size: 0.9em;
+    transition: background 0.2s, color 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+  .navbar-links li a:hover,
+  .navbar-links li a.active {
+    color: white;
+    background: rgba(255,255,255,0.08);
+    border-bottom: 3px solid #2e86c1;
+  }
+  /* ===== END NAVBAR ===== */
+
   header { background: linear-gradient(135deg, #1a5276, #2e86c1); color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
   header h1 { font-size: 2em; margin-bottom: 8px; }
   .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
   .section-title { font-size: 1.4em; font-weight: bold; color: #1a5276; margin: 30px 0 15px; border-right: 5px solid #2e86c1; padding-right: 12px; display: flex; justify-content: space-between; align-items: center; }
-  
   .input-section { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
   .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
   .form-group { display: flex; flex-direction: column; }
@@ -19,13 +62,11 @@
   .form-group input { padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 1em; }
   .btn-save { background: #1e8449; color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 15px; width: 100%; transition: background 0.3s; }
   .btn-save:hover { background: #196f3d; }
-
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-bottom: 30px; }
   .card { background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
   .card .icon { font-size: 2em; margin-bottom: 8px; }
   .card .label { font-size: 0.85em; color: #666; margin-bottom: 5px; }
   .card .value { font-size: 1.6em; font-weight: bold; color: #1a5276; }
-  
   table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
   th { background: #1a5276; color: white; padding: 14px 16px; font-size: 0.9em; }
   td { padding: 12px 16px; border-bottom: 1px solid #eee; font-size: 0.9em; text-align: center; }
@@ -33,11 +74,20 @@
   .badge-success { background: #d5f5e3; color: #1e8449; }
   .badge-warning { background: #fdebd0; color: #d35400; }
   .badge-danger { background: #fadbd8; color: #c0392b; }
-  
   footer { text-align: center; padding: 20px; color: #888; font-size: 0.9em; margin-top: 40px; border-top: 1px solid #ddd; }
 </style>
 </head>
 <body>
+
+<!-- شريط التنقل -->
+<nav class="navbar">
+  <div class="navbar-brand">🏥 نظام مؤشرات الأداء</div>
+  <ul class="navbar-links">
+    <li><a href="#input-section" class="active">📝 تسجيل البيانات</a></li>
+    <li><a href="#summary-section">📊 ملخص الأداء</a></li>
+    <li><a href="#table-section">📋 الجدول التفصيلي</a></li>
+  </ul>
+</nav>
 
 <header>
   <div style="font-size:2.5em; margin-bottom:10px;">🏥</div>
@@ -46,8 +96,8 @@
 </header>
 
 <div class="container">
-  
-  <div class="section-title">✍️ تسجيل بيانات جديدة</div>
+
+  <div class="section-title" id="input-section">✍️ تسجيل بيانات جديدة</div>
   <div class="input-section">
     <div class="grid-form">
       <div class="form-group">
@@ -70,31 +120,15 @@
     <button class="btn-save" onclick="updateDashboard()">تحديث البيانات</button>
   </div>
 
-  <div class="section-title">📊 ملخص الأداء الحالي</div>
+  <div class="section-title" id="summary-section">📊 ملخص الأداء الحالي</div>
   <div class="cards">
-    <div class="card">
-      <div class="icon">😊</div>
-      <div class="label">رضا المريض</div>
-      <div id="val-satisfaction" class="value">92%</div>
-    </div>
-    <div class="card">
-      <div class="icon">📋</div>
-      <div class="label">الالتزام</div>
-      <div id="val-protocols" class="value">96%</div>
-    </div>
-    <div class="card">
-      <div class="icon">⚠️</div>
-      <div class="label">الحوادث</div>
-      <div id="val-incidents" class="value">2.1</div>
-    </div>
-    <div class="card">
-      <div class="icon">👩‍⚕️</div>
-      <div class="label">الحضور</div>
-      <div id="val-staffing" class="value">97%</div>
-    </div>
+    <div class="card"><div class="icon">😊</div><div class="label">رضا المريض</div><div id="val-satisfaction" class="value">92%</div></div>
+    <div class="card"><div class="icon">📋</div><div class="label">الالتزام</div><div id="val-protocols" class="value">96%</div></div>
+    <div class="card"><div class="icon">⚠️</div><div class="label">الحوادث</div><div id="val-incidents" class="value">2.1</div></div>
+    <div class="card"><div class="icon">👩‍⚕️</div><div class="label">الحضور</div><div id="val-staffing" class="value">97%</div></div>
   </div>
 
-  <div class="section-title">📋 الجدول التفصيلي</div>
+  <div class="section-title" id="table-section">📋 الجدول التفصيلي</div>
   <table>
     <thead>
       <tr>
@@ -104,18 +138,29 @@
         <th>الحالة</th>
       </tr>
     </thead>
-    <tbody id="kpi-table-body">
-      <!-- ستتم تعبئتها بواسطة JavaScript -->
-    </tbody>
+    <tbody id="kpi-table-body"></tbody>
   </table>
 
 </div>
 
-<footer>
-  🏥 نظام تتبع مؤشرات الأداء التمريضي — cg
-</footer>
+<footer>🏥 نظام تتبع مؤشرات الأداء التمريضي — KAMC</footer>
 
 <script>
+  // تفعيل رابط النافبار عند التمرير
+  const sections = ['input-section', 'summary-section', 'table-section'];
+  const navLinks = document.querySelectorAll('.navbar-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 80) current = id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+
   function updateDashboard() {
     const data = {
       satisfaction: document.getElementById('inp-satisfaction').value,
@@ -123,13 +168,10 @@
       incidents: document.getElementById('inp-incidents').value,
       staffing: document.getElementById('inp-staffing').value
     };
-
-    // تحديث البطاقات
     document.getElementById('val-satisfaction').innerText = data.satisfaction + '%';
     document.getElementById('val-protocols').innerText = data.protocols + '%';
     document.getElementById('val-incidents').innerText = data.incidents;
     document.getElementById('val-staffing').innerText = data.staffing + '%';
-
     renderTable(data);
   }
 
@@ -149,27 +191,15 @@
       { name: 'معدل الحوادث / 1000 يوم', val: data.incidents, target: 2, unit: '', lessBetter: true },
       { name: 'نسبة حضور الكوادر', val: data.staffing, target: 95, unit: '%', lessBetter: false }
     ];
-
     const tbody = document.getElementById('kpi-table-body');
     tbody.innerHTML = '';
-
     kpis.forEach(kpi => {
       const status = getStatus(kpi.val, kpi.target, kpi.lessBetter);
-      const row = `
-        <tr>
-          <td>${kpi.name}</td>
-          <td><b>${kpi.val}${kpi.unit}</b></td>
-          <td>${kpi.lessBetter ? '< ' : '≥ '}${kpi.target}${kpi.unit}</td>
-          <td><span class="badge ${status.class}">${status.text}</span></td>
-        </tr>
-      `;
-      tbody.innerHTML += row;
+      tbody.innerHTML += `<tr><td>${kpi.name}</td><td><b>${kpi.val}${kpi.unit}</b></td><td>${kpi.lessBetter ? '< ' : '\u2265 '}${kpi.target}${kpi.unit}</td><td><span class="badge ${status.class}">${status.text}</span></td></tr>`;
     });
   }
 
-  // تشغيل أولي
   updateDashboard();
 </script>
-
 </body>
 </html>
