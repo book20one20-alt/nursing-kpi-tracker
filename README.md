@@ -58,7 +58,7 @@ git clone https://github.com/book20one20-alt/nursing-kpi-tracker.git
 
 ## 👨‍💼 المطوّر
 
-**عبدالله** - مدير عمليات التمريض  
+***cg** - مدير عمليات التمريض 
 📍 مدينة الملك عبدالله الطبية (KAMC) - مكة المكرمة
 
 ---
