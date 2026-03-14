@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نظام تتبع مؤشرات الأداء التمريضي</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; color: #333; direction: rtl; }
+  header { background: linear-gradient(135deg, #1a5276, #2e86c1); color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  header h1 { font-size: 2em; margin-bottom: 8px; }
+  header p { font-size: 1em; opacity: 0.85; }
+  .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+  .section-title { font-size: 1.4em; font-weight: bold; color: #1a5276; margin: 30px 0 15px; border-right: 5px solid #2e86c1; padding-right: 12px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+  .card { background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
+  .card:hover { transform: translateY(-4px); }
+  .card .icon { font-size: 2.2em; margin-bottom: 10px; }
+  .card .label { font-size: 0.9em; color: #666; margin-bottom: 6px; }
+  .card .value { font-size: 1.8em; font-weight: bold; color: #1a5276; }
+  .card .target { font-size: 0.8em; color: #999; margin-top: 4px; }
+  .card.green .value { color: #1e8449; }
+  .card.red .value { color: #c0392b; }
+  .card.orange .value { color: #d35400; }
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+  th { background: #1a5276; color: white; padding: 14px 16px; font-size: 0.95em; }
+  td { padding: 12px 16px; border-bottom: 1px solid #eee; font-size: 0.95em; text-align: center; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #eaf4fb; }
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.82em; font-weight: bold; }
+  .badge.محقق { background: #d5f5e3; color: #1e8449; }
+  .badge.مراجعة { background: #fdebd0; color: #d35400; }
+  .badge.تحت-المستهدف { background: #fadbd8; color: #c0392b; }
+  footer { text-align: center; padding: 20px; color: #888; font-size: 0.9em; margin-top: 40px; border-top: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<header>
+  <div style="font-size:2.5em; margin-bottom:10px;">🏥</div>
+  <h1>نظام تتبع مؤشرات الأداء التمريضي</h1>
+  <p>Nursing KPI Tracker — مدينة الملك عبدالله الطبية (KAMC)</p>
+</header>
+
+<div class="container">
+
+  <div class="section-title">📊 ملخص المؤشرات الرئيسية</div>
+  <div class="cards">
+    <div class="card green">
+      <div class="icon">😊</div>
+      <div class="label">رضا المريض</div>
+      <div class="value">92%</div>
+      <div class="target">الهدف: ≥ 90%</div>
+    </div>
+    <div class="card green">
+      <div class="icon">📋</div>
+      <div class="label">الالتزام بالبروتوكولات</div>
+      <div class="value">96%</div>
+      <div class="target">الهدف: ≥ 95%</div>
+    </div>
+    <div class="card orange">
+      <div class="icon">⚠️</div>
+      <div class="label">معدل الحوادث / 1000 يوم</div>
+      <div class="value">2.1</div>
+      <div class="target">الهدف: &lt; 2</div>
+    </div>
+    <div class="card green">
+      <div class="icon">👩‍⚕️</div>
+      <div class="label">حضور الكوادر</div>
+      <div class="value">97%</div>
+      <div class="target">الهدف: ≥ 95%</div>
+    </div>
+    <div class="card green">
+      <div class="icon">🔄</div>
+      <div class="label">دوران الموظفين</div>
+      <div class="value">8%</div>
+      <div class="target">الهدف: &lt; 10%</div>
+    </div>
+    <div class="card red">
+      <div class="icon">📚</div>
+      <div class="label">ساعات التدريب / ممرض</div>
+      <div class="value">17</div>
+      <div class="target">الهدف: ≥ 20 ساعة</div>
+    </div>
+  </div>
+
+  <div class="section-title">📋 تفاصيل المؤشرات</div>
+  <table>
+    <thead>
+      <tr>
+        <th>المؤشر</th>
+        <th>القيمة الحالية</th>
+        <th>الهدف</th>
+        <th>التكرار</th>
+        <th>الحالة</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>معدل رضا المريض</td>
+        <td>92%</td>
+        <td>≥ 90%</td>
+        <td>شهري</td>
+        <td><span class="badge محقق">✅ محقق</span></td>
+      </tr>
+      <tr>
+        <td>نسبة الالتزام بالبروتوكولات</td>
+        <td>96%</td>
+        <td>≥ 95%</td>
+        <td>أسبوعي</td>
+        <td><span class="badge محقق">✅ محقق</span></td>
+      </tr>
+      <tr>
+        <td>معدل الحوادث لكل 1000 يوم مريض</td>
+        <td>2.1</td>
+        <td>&lt; 2</td>
+        <td>شهري</td>
+        <td><span class="badge مراجعة">⚠️ مراجعة</span></td>
+      </tr>
+      <tr>
+        <td>نسبة حضور الكوادر</td>
+        <td>97%</td>
+        <td>≥ 95%</td>
+        <td>أسبوعي</td>
+        <td><span class="badge محقق">✅ محقق</span></td>
+      </tr>
+      <tr>
+        <td>معدل دوران الموظفين</td>
+        <td>8%</td>
+        <td>&lt; 10%</td>
+        <td>ربع سنوي</td>
+        <td><span class="badge محقق">✅ محقق</span></td>
+      </tr>
+      <tr>
+        <td>ساعات التدريب للممرض</td>
+        <td>17 ساعة</td>
+        <td>≥ 20 ساعة/سنة</td>
+        <td>سنوي</td>
+        <td><span class="badge تحت-المستهدف">❌ تحت المستهدف</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<footer>
+  🏥 نظام تتبع مؤشرات الأداء التمريضي — cg &nbsp;|&nbsp; KAMC مكة المكرمة
+</footer>
+
+</body>
+</html>
